@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>SitesPC</title>
+     <!-- 让链接默认设置为-新窗口打开 -->
+     <base target="_blank">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4301947_dfxw0q7tuhj.css">
+    <script src="./vue.js"></script>
+    <style>
+        @font-face {
+            font-family: "xfont01";
+            src: url(../font/优设标题黑.ttf);
+        }
+        @font-face {
+            font-family: "xfont02";
+            src: url(../font/胡晓波男神体.otf);
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            text-decoration: none;
+        }
+        .all{
+            display: flex;
+        }
+        .nav{
+            width: 15%;
+            background-color: #ffcb9a;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 2px 8px rgb(120, 120, 120);
+            overflow-y: scroll;
+        }
+        .nav::-webkit-scrollbar{
+            display:none ;
+        }
+        .nav>li{
+            border-radius: 25px;
+            box-shadow: 1px 1px 4px rgb(120, 120, 120);
+            background-color: #d8b08c;
+            margin:  20px;
+            padding:  2px 10px;
+
+            font-family: "xfont01";    
+            font-size: 28px;
+            color: #e8e6e6;
+            letter-spacing: 3px;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .nav li div{
+            margin-left: 15px;
+        }
+        .nav li i{
+            margin-right: 5px;
+            font-size: 25px;
+        }
+        .nav .active{
+            background-color: white;
+            color: #0f6466;
+        }
+        .main{
+            position: relative;
+            flex: 1;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+        }
+               
+        .main>li{
+            position: absolute;
+            display: none;
+
+        }
+        .main .active{
+            display: flex;
+            flex-direction: column;
+        }
+        a{
+            background-color: #0f6466;
+            min-width: 110px;
+            height: 30px;
+            line-height: 30px;
+            margin: 10px;
+            font-family: "xfont02";
+            font-size: 22px;
+            color: aliceblue;
+            border-radius: 10px;
+            box-shadow: 2px 2px 4px rgb(120, 120, 120);    
+            padding:  10px 20px;
+        }
+        a:hover{
+            background-color: white;
+            color: #0f6466;
+            font-weight: 500;
+        }
+        .in-menu{
+            width: 1000px;
+            height: 60px;
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+        .in-menu>li{
+            position: relative;
+            flex: 1;
+            background-color: #13678a;
+            min-width: 180px;
+            border-radius: 20px;
+            box-shadow: 1px 1px 1px rgb(150,150,150),-2px -2px 1px rgb(220,220,220);
+            border-bottom: 2px solid #d2e8e3;
+            height: 50px;
+            margin: 20px 10px;
+            line-height: 50px;
+            font-family: "xfont01";
+            font-size: 30px;
+            color: white;
+            letter-spacing: 2px;
+        }
+        .in-menu .active{
+            background-color: #0f6466;
+        }
+        
+        .in-content{
+            position: relative;
+        }
+        /* link-box */
+        .in-content li{
+            position: absolute;
+            display: none;
+
+        }
+        .in-content .active{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            border: 4px dotted white;
+            min-width: 1000px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            padding: 30px;
+            background-color: #9cb3bd4a;
+        }
+
+
+
+    </style>
+      
+</head>
+<body>
+    <div class="all">
+        <ul class="nav">
+            <li class="active"><div>应用制作</div><i class="iconfont icon-APK"></i></li>
+            <li><div>游戏制作</div><i class="iconfont icon-youxi"></i></li>
+            <li><div>编辑工具</div><i class="iconfont icon-wenbenshuru"></i></li>
+            <li><div>语言学习</div><i class="iconfont icon-yingwen"></i></li>
+            <li><div>配色相关</div><i class="iconfont icon-icon_secai"></i></li>
+            <li><div>资源网站</div><i class="iconfont icon-PNG"></i></li>
+            <li><div>我的网站</div><i class="iconfont icon-gerenzhongxin"></i></li>
+            <li><div>视频网站</div><i class="iconfont icon-shexiangtou_shiti"></i></li>
+            <li><div>论坛博客</div><i class="iconfont icon-duihua"></i></li>
+            <li><div>云盘存储</div><i class="iconfont icon-yunpan"></i></li>
+            <li><div>小说写作</div><i class="iconfont icon-shu"></i></li>
+            <li><div>网络加速</div><i class="iconfont icon-jiasu"></i></li>
+            <li><div>游戏世界</div><i class="iconfont icon-game-handle"></i></li>
+            <li><div>工具软件</div><i class="iconfont icon-game-handle"></i></li>
+        </ul>
+        <!-- 内容区 -->
+        <ul class="main">
+
+            <!-- 应用制作 -->
+            <li class="active">
+                <ul class="in-menu">
+                    <li class="active">应用制作</li>
+                    <li>数据库</li>
+                    <li>Api</li>
+                    <li>其他</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://uniapp.dcloud.net.cn/component/">uni-app</a>
+                        <a href="https://ext.dcloud.net.cn/">uni-插件库</a>
+                        <a href="https://unicloud.dcloud.net.cn/pages/overview/overview?pageid=mp-4be60208-de69-4ef6-9d30-ee03ffd74578">uni-cloud</a>
+                        <a href="https://developer.android.google.cn/studio/workflow?hl=zh-cn">Android Studio</a>
+                        <a href="https://element-plus.org/zh-CN/#/zh-CN">Element UI</a>
+                    </li>
+                    <li>
+                        <a href="https://www.mysql.com/cn/">mysql-Official</a>
+                        <a href="https://dev.mysql.com/downloads/windows/installer/">mysql-download</a>
+                        <a href="https://www.iconfont.cn/">iconfont</a>
+                        <a href="https://www.heidisql.com/">heidisql</a>
+                    </li>
+                    <li>
+            
+                        <a href="https://apifox.com/">Apifox</a>
+                    </li>
+                    <li>
+                        <a href="https://www.yunedit.com/update/androidzhengshu/list">香蕉证书</a>
+                        <a href="https://www.virscan.org/">virscan</a>
+                        <a href="https://www.npmjs.com/">npmjs</a>
+                        <a href="https://github.com/coreybutler/nvm-windows/releases">nvm</a>
+                        <a href="https://github.com/nvm-sh/nvm/releases">nvm-sh</a>
+                        <a href="https://www.expressjs.com.cn/">Express.js</a>
+                        <a href="https://ejs.co/">ejs-模板引擎</a>
+                        <a href="https://ejs.bootcss.com/">ejs-中文站</a>
+                        <a href="https://www.wangeditor.com/">wangEditor 5</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 游戏制作 -->
+            <li>
+                <ul class="in-menu">
+                    <li>Cocos Creator</li>
+                    <li class="active">unity</li>
+                    <li>微信小游戏</li>
+                </ul>
+                <ul class="in-content">
+                    <li>
+                        <a href="https://docs.cocos.com/creator/manual/zh/">Cocos Creator</a>
+                    </li>
+                    <li class="active">
+                        <a href="https://learn.u3d.cn/unity-learning-path">unity-学习路径</a>
+                        <a href="https://bbs.alipansou.com/t/course">unity-实例</a>
+                        <a href="https://assetstore.unity.com/zh?locale=zh-CN">Unity-资源商店</a>
+                    </li>
+                    <li>
+                        <a href="https://gamemaker.weixin.qq.com/ide?code=081Ztn000E6gKQ1deO100Js1G33Ztn0L&state=#/">微信小游戏-制作器</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 编辑工具 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">常用</li>
+                    <li>图片类</li>
+                    <li>AI绘图</li>
+                    <li>音乐类</li>
+               
+                </ul>
+                <ul class="in-content">
+                    <li  class="active">
+                        <a href="https://code.visualstudio.com/">VS Code</a>
+                        <a href="https://hx.dcloud.net.cn/Tutorial/install/windows">Hbuilder</a>
+                        <a href="https://r86oxhhvu2.feishu.cn/docs/doccnboG1hsicuOa8kX8EXJh7Db">DataGrip-G</a>
+                        <a href="https://www.jetbrains.com/datagrip/download/other.html">DataGrip</a>
+                    </li>
+                    <li>
+                        <a href="https://c.runoob.com/more/svgeditor/">Svg-Editor</a>
+                        
+                        <a href="https://github.com/Molunerfinn/PicGo/releases/">picgo</a>
+                        <a href="https://yige.baidu.com/">文心一格(AI)</a>
+                        <a href="https://gif.imageonline.co/cn/">gif-动图编辑器</a>
+
+                    </li>
+                    <li>
+                        <a href="https://www.tiamat.com/studio">tiamat</a>
+                        <a href="https://www.seaart.ai/">seaart.ai</a>
+                        <a href="https://www.gaituya.com/aiimg/?hfzhmjl230505-398193048">改图鸭(AI)</a>
+                    </li>
+                    <li>
+                        <a href="https://www.flstudiochina.com/">水果音乐</a>
+                    </li>
+            
+                </ul>
+            </li>
+            <!-- 语言学习和教程 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">web前端</li>
+                    <li>后端</li>
+                    <li>数据库知识</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://cn.vuejs.org/guide/introduction.html">Vue <sup>GW</sup></a>
+                        <a href="https://www.bilibili.com/video/BV1Ss4y1T7mZ?p=10&spm_id_from=pageDriver&vd_source=c98b68a679abc507eaab23096f685ec0">vue3 <sup>BZ-QF2023</sup></a>
+                        <a href="https://www.runoob.com/html/html-tutorial.html">HTML <sup>CN</sup></a>
+                        <a href="https://www.runoob.com/css/css-tutorial.html">CSS <sup>CN</sup></a>
+                        <a href="https://nodejs.org/en">node.js<sup>GW</sup></a>
+                        <a href="https://nodejs.cn/api/">node.js-中文网</a>
+                        <a href="https://www.bilibili.com/video/BV1gM411W7ex/?p=4&spm_id_from=333.880.my_history.page.click&vd_source=c98b68a679abc507eaab23096f685ec0">node.js <sup>BZ-SGG</sup></a>
+                        <a href="https://www.wpdaxue.com/">WordPress大学</a>
+                        <a href="https://www.runoob.com/aspnet/aspnet-tutorial.html">asp.net <sup>CN</sup></a>
+                    </li>
+                    <li>
+                        <a href="https://www.npmjs.com/">npmjs</a>
+                    </li>
+                    <li>
+                        <a href="https://www.bilibili.com/video/BV1Es4y1a7Rt/?spm_id_from=333.337.search-card.all.click&vd_source=c98b68a679abc507eaab23096f685ec0">mysql</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 配色 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">常用</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://www.toolhelper.cn/Color/RGBToHex">颜色转换</a>
+                        <a href="https://color.adobe.com/zh/explore">AdobeColor</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 资源网站 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">图片类</li>
+                    <li>音乐类</li>
+                    <li>视频类</li>
+                    <li>软件类</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://www.iconfont.cn/">iconfont</a>
+                        <a href="https://www.emojiall.com/zh-hans">Emoj表情</a>
+                        <a href="https://pixabay.com/">Pixabay</a>
+                        <a href="https://unsplash.com/">Unsplash</a>
+                        <a href="https://bing.ioliu.cn/">必应图片</a>
+                        <a href="https://www.fabiaoqing.com/">表情包</a>
+                    </li>
+                    <li>
+                        <a href="https://www.myfreemp3.com.cn/">Myfreemp3</a>
+                        <a href="https://www.musicenc.com/">MusicEnc</a>
+                    </li>
+                    <li>
+                        <a href="https://bbs.alipansou.com/t/course">阿里云资源</a>
+                    </li>
+                    <li>
+                        <a href="https://www.52pojie.cn/">吾爱破解</a>
+                        <a href="http://www.tao94.cn/">软件下载</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 我的网站 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">博客设计</li>
+                    <li>本地网站</li>
+                    <li>SitesPC</li>
+                    <li>其他</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://hqz1874.github.io/mysite/">mysite</a>
+                        <a href="https://hqz1874.github.io/myworkbench/">workbench</a>
+                        <a href="http://hqz1874.gitee.io/myworkbench">workbench-cn</a>
+                    </li>
+                    <li>
+                        <a href="http://www.yl123yl.com/">衡千嶂的世界(wp)</a>
+                    
+                    </li>
+                    <li>
+                        <a href="https://hqz1874.github.io/myworkbench/pages/SiteCollectionPC.html">SiteCollection</a>
+
+                    </li>
+                    <li>
+                        <a href="https://kdocs.cn/l/coBqTUbi6wVu">IT日记</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 视频网站 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">国内</li>
+                    <li>国外</li>
+                    <li>其他</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://www.bilibili.com/">Bilibili</a>
+                        <a href="https://v.qq.com/">腾讯视频</a>
+                        <a href="https://www.iqiyi.com/">爱奇艺</a>
+                        <a href="https://www.mgtv.com/">芒果TV</a>
+                        <a href="https://www.youku.com/channel/webhome">优酷视频</a>
+                        <a href="https://www.douyin.com/discover">抖音网页版</a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/">Youtube</a>
+                    </li>
+                    <li>
+                        <a href="https://m.xb84w.net/">xiaobainet</a>
+                        <a href="https://www.yhdmz.org/">樱花动漫（正版）</a>
+                        <a href="https://www.yhdm44.com/">樱花动漫（存疑）</a>
+                        <a href="https://www.cupfox.app/">茶杯狐</a>
+                        
+                    </li>
+                </ul>
+            </li>
+            <!-- 博客论坛 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">国内</li>
+                    <li>国外</li>
+                    <li>博客</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://gitee.com/">Gitee</a>
+                        <a href="https://www.csdn.net/?spm=1001.2101.3001.4476">CSDN</a>
+                        <a href="https://tieba.baidu.com/index.html">百度贴吧</a>
+                        <a href="https://www.zhihu.com/">知乎</a>
+                        <a href="https://www.douban.com/">豆瓣</a>
+                        <a href="http://bbs.kaoyan.com/">考研论坛</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/">GitHub</a>
+                        <a href="https://web.telegram.org/a/#-1621439089">Telegram</a>
+                    </li>
+                    <li>
+                        <a href="https://blog.naibabiji.com/tutorial">奶爸建站笔记</a>
+                        <a href="https://qinghe.me/">西贝博客</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 云盘存储 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">云盘</li>
+                    <li>服务器</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://mypikpak.com/drive/all">Pikpak</a>
+                        <a href="https://www.aliyundrive.com/">阿里云盘</a>
+                        <a href="https://pan.baidu.com/disk/main#/index?category=all">百度云盘</a>
+                        <a href="https://pan.quark.cn/list#/list/all">夸克网盘</a>
+                        <a href="https://pan.xunlei.com/login/">迅雷网盘</a>
+                        <a href="https://www.lanzoui.com/">蓝奏云盘</a>
+                        <a href="https://photo.baidu.com/photo/web/home?_at_=1694924428288">一刻相册</a>
+                    </li>
+                    <li>
+                        <a href="https://cloud.tencent.com/">腾讯云</a>
+                        <a href="https://cn.aliyun.com/">阿里云</a>
+                        <a href="https://console.huaweicloud.com/console/?region=cn-east-3#/home">华为云</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 写作 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">小说写作</li>
+                    <li>资料收集</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://www.kdocs.cn/l/cu4zrS3oNoT0">创作合集</a>
+                        <a href="https://write.qq.com/">阅文平台</a>
+                        <a href="https://fanqienovel.com/writer/zone/">番茄小说</a>
+                        <a href="https://namegentool.com/zh-hans">随机名称</a>
+                        <a href="https://uutool.cn/cn-name/">随机名称2</a>
+                    </li>
+                    <li>
+                        <a href="https://www.gushicimingju.com/">国学荟</a>
+                    </li>
+                </ul>
+            </li>
+            <!--网络加速 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">游戏加速</li>
+                    <li>全局加速</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://steampp.net"> Watt Toolkit(原Steam++)</a>
+                    </li>
+                    <li>
+                        <a href="https://iplocation.io/what-is-my-ip-address">ip查询</a>
+                        <a href="https://1.1.1.1/">Cloudflare</a>
+                        <a href="https://ins.ins66.com/#/dashboard">ins66</a>
+                        <a href="https://xiaopen.xyz/user">小白云</a>
+                        <a href="https://www.hurricanerelay.net/#/plan">飓风Cloud(15元月度150G限速300M)</a>
+                        <a href="https://www.bygcloud.com/#/stage/buysubs">白月光(66元季度100G每月不限速)</a>
+                        <a href="https://58sd.net/#/plan">闪电</a>
+                        <a href="https://www.cordcloud.biz/user">cordcloud</a>
+                        <a href="https://zoogvpn.com/">zoogvpn-注意是vpn</a>
+                        <a href="https://cownode.com/#/dashboard">奶牛云-9元-美</a>
+                        <a href=""></a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 游戏世界 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">游戏王</li>
+                    <li>我的世界</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="ygopro.ysepan.com">娱乐力量全开!——YGO Game Online</a>
+                        <a href="ymssx.gitee.io/card/">游戏王制卡器</a>
+                    </li>
+                    <li>
+                        <a href="https://afdian.net/p/0164034c016c11ebafcb52540025c377">PCL</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 工具软件 -->
+            <li>
+                <ul class="in-menu">
+                    <li class="active">实用工具</li>
+                </ul>
+                <ul class="in-content">
+                    <li class="active">
+                        <a href="https://zh.snipaste.com/">snipaste-截图</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var menuitems = document.querySelectorAll(".nav li")
+        var boxes = document.querySelectorAll(".main>li")
+
+        for(var i=0 ; i < menuitems.length ;i++){
+            menuitems[i].dataset.index = i
+            menuitems[i].onclick = function(){
+                var index = this.dataset.index
+                for(var m=0 ; m < menuitems.length ; m++){
+                    menuitems[m].classList.remove("active")
+                    boxes[m].classList.remove("active")
+                }
+                menuitems[index].classList.add("active")
+                boxes[index].classList.add("active")
+            }
+        }
+    </script>
+    <script>
+        var menuitems01 = document.querySelectorAll(".in-menu>li")
+        console.log(menuitems01);
+        var boxes01 = document.querySelectorAll(".in-content>li")
+
+        for(var i01=0 ; i01 < menuitems01.length ;i01++){
+            menuitems01[i01].dataset.index01 = i01
+            menuitems01[i01].onclick = function(){
+                var index01 = this.dataset.index01
+                for(var m01=0 ; m01 < menuitems01.length ; m01++){
+                    menuitems01[m01].classList.remove("active")
+                    boxes01[m01].classList.remove("active")
+                }
+                menuitems01[index01].classList.add("active")
+                boxes01[index01].classList.add("active")
+            }
+        }
+    </script>
+</body>
+</html>
