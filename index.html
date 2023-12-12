@@ -1,558 +1,735 @@
 <!DOCTYPE html>
-<html>
+<html lang="cn">
+
 <head>
-    <meta charset="UTF-8" />
-    <title>SitesPC</title>
-     <!-- 让链接默认设置为-新窗口打开 -->
-     <base target="_blank">
-    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4301947_dfxw0q7tuhj.css">
-    <script src="./vue.js"></script>
-    <style>
-        @font-face {
-            font-family: "xfont01";
-            src: url(../font/优设标题黑.ttf);
-        }
-        @font-face {
-            font-family: "xfont02";
-            src: url(../font/胡晓波男神体.otf);
-        }
-        *{
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            text-align: center;
-            text-decoration: none;
-        }
-        .all{
-            display: flex;
-            width: 100%;
-            height: 100vh;
-        }
-        .nav{
-            width: 15%;
-            background-color: #ffcb9a;
-            border-radius: 0 10px 10px 0;
-            box-shadow: 2px 2px 8px rgb(120, 120, 120);
-            overflow-y: scroll;
-        }
-        .nav::-webkit-scrollbar{
-            display:none ;
-        }
-        .nav>li{
-            border-radius: 25px;
-            box-shadow: 1px 1px 4px rgb(120, 120, 120);
-            background-color: #d8b08c;
-            margin:  20px;
-            padding:  2px 10px;
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sites</title>
+  <link rel="icon" href="/icon/site_logo.jfif" sizes="16x16">
+  <base target="_blank">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-            font-family: "xfont01";    
-            font-size: 26px;
-            color: #e8e6e6;
-            letter-spacing: 3px;
-
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .nav li div{
-            margin-left: 15px;
-        }
-        .nav li i{
-            margin-right: 5px;
-            font-size: 25px;
-        }
-        .nav .active{
-            background-color: white;
-            color: #0f6466;
-        }
-        .main{
-            position: relative;
-            flex: 1;
-            background-color: transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-y: scroll;
-        }
-               
-        .main>li{
-            position: absolute;
-            display: none;
-
-        }
-        .main .active{
-            display: flex;
-            flex-direction: column;
-        }
-        a{
-            background-color: #0f6466;
-            min-width: 110px;
-            height: 30px;
-            line-height: 30px;
-            margin: 10px;
-            font-family: "xfont02";
-            font-size: 22px;
-            color: aliceblue;
-            border-radius: 10px;
-            box-shadow: 2px 2px 4px rgb(120, 120, 120);    
-            padding:  10px 20px;
-        }
-        a:hover{
-            background-color: white;
-            color: #0f6466;
-            font-weight: 500;
-        }
-        .in-menu{
-            width: 1000px;
-            height: 60px;
-            display: flex;
-            flex-direction: row;
-            margin-top: 10px;
-        }
-        .in-menu>li{
-            position: relative;
-            flex: 1;
-            background-color: #13678a;
-            min-width: 180px;
-            border-radius: 20px;
-            box-shadow: 1px 1px 1px rgb(150,150,150),-2px -2px 1px rgb(220,220,220);
-            border-bottom: 2px solid #d2e8e3;
-            height: 50px;
-            margin: 20px 10px;
-            line-height: 50px;
-            font-family: "xfont01";
-            font-size: 30px;
-            color: white;
-            letter-spacing: 2px;
-        }
-        .in-menu .active{
-            background-color: #0f6466;
-        }
-        
-        .in-content{
-            position: relative;
-        }
-        /* link-box */
-        .in-content li{
-            position: absolute;
-            display: none;
-
-        }
-        .in-content .active{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            align-items: center;
-            border: 4px dotted white;
-            min-width: 1000px;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            padding: 30px;
-            background-color: #9cb3bd4a;
-        }
-
-
-
-    </style>
-      
 </head>
+
 <body>
-    <div class="all">
-        <ul class="nav">
-            <li class="active"><div>应用制作</div><i class="iconfont icon-APK"></i></li>
-            <li><div>游戏制作</div><i class="iconfont icon-youxi"></i></li>
-            <li><div>编辑工具</div><i class="iconfont icon-wenbenshuru"></i></li>
-            <li><div>语言学习</div><i class="iconfont icon-yingwen"></i></li>
-            <li><div>配色相关</div><i class="iconfont icon-icon_secai"></i></li>
-            <li><div>资源网站</div><i class="iconfont icon-PNG"></i></li>
-            <li><div>我的网站</div><i class="iconfont icon-gerenzhongxin"></i></li>
-            <li><div>视频网站</div><i class="iconfont icon-shexiangtou_shiti"></i></li>
-            <li><div>论坛博客</div><i class="iconfont icon-duihua"></i></li>
-            <li><div>云盘存储</div><i class="iconfont icon-yunpan"></i></li>
-            <li><div>小说写作</div><i class="iconfont icon-shu"></i></li>
-            <li><div>网络加速</div><i class="iconfont icon-jiasu"></i></li>
-            <li><div>游戏世界</div><i class="iconfont icon-game-handle"></i></li>
-            <li><div>工具软件</div><i class="iconfont icon-game-handle"></i></li>
-        </ul>
-        <!-- 内容区 -->
-        <ul class="main">
+  <div class="all" id="app">
 
-            <!-- 应用制作 -->
-            <li class="active">
-                <ul class="in-menu">
-                    <li class="active">应用制作</li>
-                    <li>数据库</li>
-                    <li>Api</li>
-                    <li>其他</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://uniapp.dcloud.net.cn/component/">uni-app</a>
-                        <a href="https://ext.dcloud.net.cn/">uni-插件库</a>
-                        <a href="https://unicloud.dcloud.net.cn/pages/overview/overview?pageid=mp-4be60208-de69-4ef6-9d30-ee03ffd74578">uni-cloud</a>
-                        <a href="https://developer.android.google.cn/studio/workflow?hl=zh-cn">Android Studio</a>
-                        <a href="https://element-plus.org/zh-CN/#/zh-CN">Element UI</a>
-                    </li>
-                    <li>
-                        <a href="https://www.mysql.com/cn/">mysql-Official</a>
-                        <a href="https://dev.mysql.com/downloads/windows/installer/">mysql-download</a>
-                        <a href="https://www.iconfont.cn/">iconfont</a>
-                        <a href="https://www.heidisql.com/">heidisql</a>
-                    </li>
-                    <li>
-            
-                        <a href="https://apifox.com/">Apifox</a>
-                    </li>
-                    <li>
-                        <a href="https://www.yunedit.com/update/androidzhengshu/list">香蕉证书</a>
-                        <a href="https://www.virscan.org/">virscan</a>
-                        <a href="https://www.npmjs.com/">npmjs</a>
-                        <a href="https://github.com/coreybutler/nvm-windows/releases">nvm</a>
-                        <a href="https://github.com/nvm-sh/nvm/releases">nvm-sh</a>
-                        <a href="https://www.expressjs.com.cn/">Express.js</a>
-                        <a href="https://ejs.co/">ejs-模板引擎</a>
-                        <a href="https://ejs.bootcss.com/">ejs-中文站</a>
-                        <a href="https://www.wangeditor.com/">wangEditor 5</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 游戏制作 -->
-            <li>
-                <ul class="in-menu">
-                    <li>Cocos Creator</li>
-                    <li class="active">unity</li>
-                    <li>微信小游戏</li>
-                </ul>
-                <ul class="in-content">
-                    <li>
-                        <a href="https://docs.cocos.com/creator/manual/zh/">Cocos Creator</a>
-                    </li>
-                    <li class="active">
-                        <a href="https://learn.u3d.cn/unity-learning-path">unity-学习路径</a>
-                        <a href="https://bbs.alipansou.com/t/course">unity-实例</a>
-                        <a href="https://assetstore.unity.com/zh?locale=zh-CN">Unity-资源商店</a>
-                    </li>
-                    <li>
-                        <a href="https://gamemaker.weixin.qq.com/ide?code=081Ztn000E6gKQ1deO100Js1G33Ztn0L&state=#/">微信小游戏-制作器</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 编辑工具 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">常用</li>
-                    <li>图片类</li>
-                    <li>AI绘图</li>
-                    <li>音乐类</li>
-               
-                </ul>
-                <ul class="in-content">
-                    <li  class="active">
-                        <a href="https://code.visualstudio.com/">VS Code</a>
-                        <a href="https://hx.dcloud.net.cn/Tutorial/install/windows">Hbuilder</a>
-                        <a href="https://r86oxhhvu2.feishu.cn/docs/doccnboG1hsicuOa8kX8EXJh7Db">DataGrip-G</a>
-                        <a href="https://www.jetbrains.com/datagrip/download/other.html">DataGrip</a>
-                    </li>
-                    <li>
-                        <a href="https://c.runoob.com/more/svgeditor/">Svg-Editor</a>
-                        
-                        <a href="https://github.com/Molunerfinn/PicGo/releases/">picgo</a>
-                        <a href="https://yige.baidu.com/">文心一格(AI)</a>
-                        <a href="https://gif.imageonline.co/cn/">gif-动图编辑器</a>
-
-                    </li>
-                    <li>
-                        <a href="https://www.tiamat.com/studio">tiamat</a>
-                        <a href="https://www.seaart.ai/">seaart.ai</a>
-                        <a href="https://www.gaituya.com/aiimg/?hfzhmjl230505-398193048">改图鸭(AI)</a>
-                    </li>
-                    <li>
-                        <a href="https://www.flstudiochina.com/">水果音乐</a>
-                    </li>
-            
-                </ul>
-            </li>
-            <!-- 语言学习和教程 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">web前端</li>
-                    <li>后端</li>
-                    <li>数据库知识</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://cn.vuejs.org/guide/introduction.html">Vue <sup>GW</sup></a>
-                        <a href="https://www.bilibili.com/video/BV1Ss4y1T7mZ?p=10&spm_id_from=pageDriver&vd_source=c98b68a679abc507eaab23096f685ec0">vue3 <sup>BZ-QF2023</sup></a>
-                        <a href="https://www.runoob.com/html/html-tutorial.html">HTML <sup>CN</sup></a>
-                        <a href="https://www.runoob.com/css/css-tutorial.html">CSS <sup>CN</sup></a>
-                        <a href="https://nodejs.org/en">node.js<sup>GW</sup></a>
-                        <a href="https://nodejs.cn/api/">node.js-中文网</a>
-                        <a href="https://www.bilibili.com/video/BV1gM411W7ex/?p=4&spm_id_from=333.880.my_history.page.click&vd_source=c98b68a679abc507eaab23096f685ec0">node.js <sup>BZ-SGG</sup></a>
-                        <a href="https://www.wpdaxue.com/">WordPress大学</a>
-                        <a href="https://www.runoob.com/aspnet/aspnet-tutorial.html">asp.net <sup>CN</sup></a>
-                    </li>
-                    <li>
-                        <a href="https://www.npmjs.com/">npmjs</a>
-                    </li>
-                    <li>
-                        <a href="https://www.bilibili.com/video/BV1Es4y1a7Rt/?spm_id_from=333.337.search-card.all.click&vd_source=c98b68a679abc507eaab23096f685ec0">mysql</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 配色 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">常用</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://www.toolhelper.cn/Color/RGBToHex">颜色转换</a>
-                        <a href="https://color.adobe.com/zh/explore">AdobeColor</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 资源网站 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">图片类</li>
-                    <li>音乐类</li>
-                    <li>视频类</li>
-                    <li>软件类</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://www.iconfont.cn/">iconfont</a>
-                        <a href="https://www.emojiall.com/zh-hans">Emoj表情</a>
-                        <a href="https://pixabay.com/">Pixabay</a>
-                        <a href="https://unsplash.com/">Unsplash</a>
-                        <a href="https://bing.ioliu.cn/">必应图片</a>
-                        <a href="https://www.fabiaoqing.com/">表情包</a>
-                    </li>
-                    <li>
-                        <a href="https://www.myfreemp3.com.cn/">Myfreemp3</a>
-                        <a href="https://www.musicenc.com/">MusicEnc</a>
-                    </li>
-                    <li>
-                        <a href="https://bbs.alipansou.com/t/course">阿里云资源</a>
-                    </li>
-                    <li>
-                        <a href="https://www.52pojie.cn/">吾爱破解</a>
-                        <a href="http://www.tao94.cn/">软件下载</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 我的网站 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">博客设计</li>
-                    <li>本地网站</li>
-                    <li>SitesPC</li>
-                    <li>其他</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://hqz1874.github.io/mysite/">mysite</a>
-                        <a href="https://hqz1874.github.io/myworkbench/">workbench</a>
-                        <a href="http://hqz1874.gitee.io/myworkbench">workbench-cn</a>
-                    </li>
-                    <li>
-                        <a href="http://www.yl123yl.com/">衡千嶂的世界(wp)</a>
-                    
-                    </li>
-                    <li>
-                        <a href="https://hqz1874.github.io/myworkbench/pages/SiteCollectionPC.html">SiteCollection</a>
-
-                    </li>
-                    <li>
-                        <a href="https://kdocs.cn/l/coBqTUbi6wVu">IT日记</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 视频网站 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">国内</li>
-                    <li>国外</li>
-                    <li>其他</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://www.bilibili.com/">Bilibili</a>
-                        <a href="https://v.qq.com/">腾讯视频</a>
-                        <a href="https://www.iqiyi.com/">爱奇艺</a>
-                        <a href="https://www.mgtv.com/">芒果TV</a>
-                        <a href="https://www.youku.com/channel/webhome">优酷视频</a>
-                        <a href="https://www.douyin.com/discover">抖音网页版</a>
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/">Youtube</a>
-                    </li>
-                    <li>
-                        <a href="https://m.xb84w.net/">xiaobainet</a>
-                        <a href="https://www.yhdmz.org/">樱花动漫（正版）</a>
-                        <a href="https://www.yhdm44.com/">樱花动漫（存疑）</a>
-                        <a href="https://www.cupfox.app/">茶杯狐</a>
-                        
-                    </li>
-                </ul>
-            </li>
-            <!-- 博客论坛 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">国内</li>
-                    <li>国外</li>
-                    <li>博客</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://gitee.com/">Gitee</a>
-                        <a href="https://www.csdn.net/?spm=1001.2101.3001.4476">CSDN</a>
-                        <a href="https://tieba.baidu.com/index.html">百度贴吧</a>
-                        <a href="https://www.zhihu.com/">知乎</a>
-                        <a href="https://www.douban.com/">豆瓣</a>
-                        <a href="http://bbs.kaoyan.com/">考研论坛</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/">GitHub</a>
-                        <a href="https://web.telegram.org/a/#-1621439089">Telegram</a>
-                    </li>
-                    <li>
-                        <a href="https://blog.naibabiji.com/tutorial">奶爸建站笔记</a>
-                        <a href="https://qinghe.me/">西贝博客</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 云盘存储 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">云盘</li>
-                    <li>服务器</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://mypikpak.com/drive/all">Pikpak</a>
-                        <a href="https://www.aliyundrive.com/">阿里云盘</a>
-                        <a href="https://pan.baidu.com/disk/main#/index?category=all">百度云盘</a>
-                        <a href="https://pan.quark.cn/list#/list/all">夸克网盘</a>
-                        <a href="https://pan.xunlei.com/login/">迅雷网盘</a>
-                        <a href="https://www.lanzoui.com/">蓝奏云盘</a>
-                        <a href="https://photo.baidu.com/photo/web/home?_at_=1694924428288">一刻相册</a>
-                    </li>
-                    <li>
-                        <a href="https://cloud.tencent.com/">腾讯云</a>
-                        <a href="https://cn.aliyun.com/">阿里云</a>
-                        <a href="https://console.huaweicloud.com/console/?region=cn-east-3#/home">华为云</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 写作 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">小说写作</li>
-                    <li>资料收集</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://www.kdocs.cn/l/cu4zrS3oNoT0">创作合集</a>
-                        <a href="https://write.qq.com/">阅文平台</a>
-                        <a href="https://fanqienovel.com/writer/zone/">番茄小说</a>
-                        <a href="https://namegentool.com/zh-hans">随机名称</a>
-                        <a href="https://uutool.cn/cn-name/">随机名称2</a>
-                    </li>
-                    <li>
-                        <a href="https://www.gushicimingju.com/">国学荟</a>
-                    </li>
-                </ul>
-            </li>
-            <!--网络加速 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">游戏加速</li>
-                    <li>全局加速</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://steampp.net"> Watt Toolkit(原Steam++)</a>
-                    </li>
-                    <li>
-                        <a href="https://iplocation.io/what-is-my-ip-address">ip查询</a>
-                        <a href="https://1.1.1.1/">Cloudflare</a>
-                        <a href="https://ins.ins66.com/#/dashboard">ins66</a>
-                        <a href="https://xiaopen.xyz/user">小白云</a>
-                        <a href="https://www.hurricanerelay.net/#/plan">飓风Cloud(15元月度150G限速300M)</a>
-                        <a href="https://www.bygcloud.com/#/stage/buysubs">白月光(66元季度100G每月不限速)</a>
-                        <a href="https://58sd.net/#/plan">闪电</a>
-                        <a href="https://www.cordcloud.biz/user">cordcloud</a>
-                        <a href="https://zoogvpn.com/">zoogvpn-注意是vpn</a>
-                        <a href="https://cownode.com/#/dashboard">奶牛云-9元-美</a>
-                        <a href=""></a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 游戏世界 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">游戏王</li>
-                    <li>我的世界</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="ygopro.ysepan.com">娱乐力量全开!——YGO Game Online</a>
-                        <a href="ymssx.gitee.io/card/">游戏王制卡器</a>
-                    </li>
-                    <li>
-                        <a href="https://afdian.net/p/0164034c016c11ebafcb52540025c377">PCL</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- 工具软件 -->
-            <li>
-                <ul class="in-menu">
-                    <li class="active">实用工具</li>
-                </ul>
-                <ul class="in-content">
-                    <li class="active">
-                        <a href="https://zh.snipaste.com/">snipaste-截图</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <div class="blockOne">
+      <a href="/pages/admin.html">momo</a>
     </div>
-    <script>
-        var menuitems = document.querySelectorAll(".nav li")
-        var boxes = document.querySelectorAll(".main>li")
 
-        for(var i=0 ; i < menuitems.length ;i++){
-            menuitems[i].dataset.index = i
-            menuitems[i].onclick = function(){
-                var index = this.dataset.index
-                for(var m=0 ; m < menuitems.length ; m++){
-                    menuitems[m].classList.remove("active")
-                    boxes[m].classList.remove("active")
-                }
-                menuitems[index].classList.add("active")
-                boxes[index].classList.add("active")
-            }
-        }
-    </script>
-    <script>
-        var menuitems01 = document.querySelectorAll(".in-menu>li")
-        console.log(menuitems01);
-        var boxes01 = document.querySelectorAll(".in-content>li")
 
-        for(var i01=0 ; i01 < menuitems01.length ;i01++){
-            menuitems01[i01].dataset.index01 = i01
-            menuitems01[i01].onclick = function(){
-                var index01 = this.dataset.index01
-                for(var m01=0 ; m01 < menuitems01.length ; m01++){
-                    menuitems01[m01].classList.remove("active")
-                    boxes01[m01].classList.remove("active")
-                }
-                menuitems01[index01].classList.add("active")
-                boxes01[index01].classList.add("active")
-            }
-        }
-    </script>
+    <!-- 搜素框 -->
+    <div class="blockTwo">
+      <div class="search">
+        <!-- <ul class="ss1">
+          <li><img src="/icon/bing_logo.jfif" alt="" @chick="change_search_engine(bing)" class="opt"></li>
+          <li><img src="/icon/google_logo.jfif" alt="" @chick="change_search_engine(bing)" class="opt"></li>
+          <li><img src="/icon/baidu_logo.jpg" alt=""@chick="change_search_engine(bing)" class="opt"></li>
+        </ul> -->
+        <div class="ss1">
+          <img :src="search_engine_icon" alt="" class="opt2">
+          <div class="ss1_in">
+            <img src="icon/bing_logo.png" alt="" class="opt" @click="change_search_engine('bing')">
+            <img src="icon/bing_logo.png" alt="" class="opt" @click="change_search_engine('bing')">
+            <img src="icon/bing_logo.png" alt="" class="opt" @click="change_search_engine('bing')">
+            <img src="icon/bing_logo.png" alt="" class="opt" @click="change_search_engine('bing')">
+            <img src="icon/google_logo.png" alt="" class="opt" @click="change_search_engine('google')">
+            <img src="icon/bilbil_logo.png" alt="" class="opt" @click="change_search_engine('bilbil')">
+            <img src="icon/csdn.png" alt="" class="opt" @click="change_search_engine('csdn')">
+            <img src="icon/baidu_logo.png" alt="" class="opt" @click="change_search_engine('baidu')">
+          </div>
+        </div>
+
+        <!-- <select name="search_engine" id=""class="ss1" v-on:change="change_search_engine" >
+          <option value="bing" >-> bing</option>
+          <option value="google" >-> google</option>
+          <option value="baidu">-> baidu</option>
+         </select> -->
+
+        <input class="ss2" type="text" v-model="keyword" @keyup.enter="open_web">
+
+        <!-- <div ></div> -->
+        <img src="icon/search.png" class="ss3" @click="open_web">
+      </div>
+    </div>
+
+
+    <!-- 网址展示 -->
+    <div class="blockThree">
+      <div class="navmenu">
+        <div @click="changeState(1)">编程语言</div>
+        <div @click="changeState(2)">应用制作</div>
+        <div @click="changeState(3)">网云存储</div>
+        <div @click="changeState(4)">资源网站</div>
+        <div @click="changeState(5)">视频网站</div>
+        <div @click="changeState(6)">社区论坛</div>
+        <div @click="changeState(7)">网络加速</div>
+        <div @click="changeState(8)">工具软件</div>
+        <div @click="changeState(9)">公共服务</div>
+
+        <div @click="changeState(100)">添加网址</div>
+      </div>
+
+      <!-- 编程语言 -->
+      <div class="content" v-if="state == 1">
+
+        <div class="sitesbox">
+          <div class="sort">html + css</div>
+          <div class="sites">
+            <div v-for="item in htmlcss_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">Javascript</div>
+          <div class="sites">
+            <div v-for="item in javascript_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">SQL</div>
+          <div class="sites">
+            <div v-for="item in sql_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- 应用制作 -->
+      <div class="content" v-if="state == 2">
+
+        <div class="sitesbox">
+          <div class="sort">apk 制作</div>
+          <div class="sites">
+            <div v-for="item in mobile_apps_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">exe 制作</div>
+          <div class="sites">
+            <div v-for="item in computer_apps_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- 网云存储 -->
+      <div class="content" v-if="state == 3">
+
+        <div class="sitesbox">
+          <div class="sort">网盘</div>
+          <div class="sites">
+            <div v-for="item in network_disk_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">服务器</div>
+          <div class="sites">
+            <div v-for="item in network_server_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 资源网站 -->
+      <div class="content" v-if="state == 4">
+
+        <div class="sitesbox">
+          <div class="sort">图片资源</div>
+          <div class="sites">
+            <div v-for="item in resource_img_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">影视资源</div>
+          <div class="sites">
+            <div v-for="item in resource_film_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="sitesbox">
+          <div class="sort">教程资源</div>
+          <div class="sites">
+            <div v-for="item in resource_course_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 视频网站 -->
+      <div class="content" v-if="state == 5">
+
+        <div class="sitesbox">
+          <div class="sort">国内</div>
+          <div class="sites">
+            <div v-for="item in video_domestic_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">国际</div>
+          <div class="sites">
+            <div v-for="item in video_international_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">其他</div>
+          <div class="sites">
+            <div v-for="item in video_other_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 论坛博客 -->
+      <div class="content" v-if="state == 6">
+
+        <div class="sitesbox">
+          <div class="sort">社区论坛</div>
+          <div class="sites">
+            <div v-for="item in forum_public_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">专业论坛</div>
+          <div class="sites">
+            <div v-for="item in forum_professional_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">博客网站</div>
+          <div class="sites">
+            <div v-for="item in siteblog_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 网络加速 -->
+      <div class="content" v-if="state == 7">
+
+        <div class="sitesbox">
+          <div class="sort">网络加速</div>
+          <div class="sites">
+            <div v-for="item in net_speed_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">网络代理</div>
+          <div class="sites">
+            <div v-for="item in net_proxy_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+      <!-- 工具软件 -->
+      <div class="content" v-if="state == 8">
+
+        <div class="sitesbox">
+          <div class="sort">小工具</div>
+          <div class="sites">
+            <div v-for="item in tools_generic_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sitesbox">
+          <div class="sort">专业工具</div>
+          <div class="sites">
+            <div v-for="item in tools_professional_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 公共服务 -->
+      <div class="content" v-if="state == 9">
+
+        <div class="sitesbox">
+          <div class="sort">教育类</div>
+          <div class="sites">
+            <div v-for="item in public_edu_data" class="siteinfo">
+              <img :src="item.img" alt="" class="webicon">
+              <div>
+                <a :href="item.url">{{item.name}}</a>
+                <div>{{item.intro}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 网站添加 -->
+      <div class="content" v-if="state == 100">
+        <form action="http://127.0.0.1:8080/sitecollection/info" class="siteform" method="post"
+          enctype="multipart/form-data">
+          <!-- 录入网站名称 -->
+          <div class="row">
+            <div class="name">网站名称</div>
+            <input type="text" class="value" placeholder="请输入网站名称" name="name">
+          </div>
+          <!-- 录入网址url -->
+          <div class="row">
+            <div class="name">网址url</div>
+            <input type="text" class="value" placeholder="请输入网址" name="url">
+          </div>
+          <!-- 录入网站简介 -->
+          <div class="row">
+            <div class="name">网站简介</div>
+            <input type="text" class="value" placeholder="请输入网站简介" name="intro">
+          </div>
+          <!-- 选择分类1 -->
+          <div class="row">
+            <div class="name">classone</div>
+            <select name="classone" class="value">
+              <option value="编程语言" selected>编程语言</option>
+              <option value="应用制作">应用制作</option>
+              <option value="网盘服务">网云存储</option>
+              <option value="资源网站">资源网站</option>
+              <option value="视频网站">视频网站</option>
+              <option value="社区论坛">社区论坛</option>
+              <option value="网络加速">网络加速</option>
+              <option value="工具软件">工具软件</option>
+              <option value="公共服务">公共服务</option>
+            </select>
+          </div>
+          <!-- 选择分类2 -->
+          <div class="row">
+            <div class="name">classtwo</div>
+            <select name="classtwo" class="value">
+              <option value="none" selected>none</option>
+              <!-- 编程语言 -->
+              <option value="htmlcss">htmlcss</option>
+              <option value="javascript">javascript</option>
+              <option value="sql">sql</option>
+              <!-- 应用制作 -->
+              <option value="mobile_apps">mobile_apps</option>
+              <!-- 网云存储 -->
+              <option value="network_disk">network_disk</option>
+              <option value="network_server">network_server</option>
+              <!-- 资源网站 -->
+              <option value="resource_img">resource_img</option>
+              <option value="resource_film">resource_film</option>
+              <option value="resource_course">resource_course</option>
+              <!-- 视频网站 -->
+              <option value="video_domestic">video_domestic</option>
+              <option value="video_international">video_international</option>
+              <option value="video_other">video_other</option>
+              <!-- 社区论坛 -->
+              <option value="forum_public">forum_public</option>
+              <option value="forum_professional">forum_professional</option>
+              <option value="siteblog">siteblog</option>
+              <!-- 网络加速 -->
+              <option value="net_speed">net_speed</option>
+              <option value="net_proxy">net_proxy</option>
+              <!-- 工具软件 -->
+              <option value="tools_generic">tools_generic</option>
+              <option value="tools_professional">tools_professional</option>
+              <!-- <option value=""></option> -->
+              <!-- 公共服务 -->
+              <option value="public_edu">public_edu</option>
+
+            </select>
+          </div>
+
+          <input type="submit" value="ok">
+          <!-- <button form-type="submit">提交</button> -->
+        </form>
+      </div>
+
+    </div>
+  </div>
 </body>
+<script>
+  const { createApp, ref } = Vue
+  const app = createApp({
+    setup() {
+      const state = ref(1)
+
+      const backdata = ref([])
+      // 编程
+      const htmlcss_data = ref([])
+      const javascript_data = ref([])
+      const sql_data = ref([])
+      // 应用
+      const mobile_apps_data = ref([])
+      const computer_apps_data = ref([])
+      // 网盘
+      const network_disk_data = ref([])
+      const network_server_data = ref([])
+      // 资源
+      const resource_img_data = ref([])
+      const resource_film_data = ref([])
+      const resource_course_data = ref([])
+      // 视频
+      const video_domestic_data = ref([])
+      const video_international_data = ref([])
+      const video_other_data = ref([])
+
+      // 论坛
+      const forum_public_data = ref([])
+      const forum_professional_data = ref([])
+      const siteblog_data = ref([])
+      // 网络
+      const net_speed_data = ref([])
+      const net_proxy_data = ref([])
+      // 工具
+      const tools_generic_data = ref([])
+      const tools_professional_data = ref([])
+      // 公共
+      const public_edu_data = ref([])
+
+
+      const changeState = (num) => {
+        state.value = num
+      }
+      const getdata = () => {
+        console.log('jingru');
+        axios({
+          method: 'get',//提交方法
+          url: 'http://127.0.0.1:8080/sitecollection/infoall'    //提交地址
+          // params: {
+          // username,
+          // }
+        }).then((res) => {
+          let ress = res.data
+          backdata.value = ress
+          console.log(ress);
+
+          // 编程语言
+          htmlcss_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'htmlcss'
+          })
+          javascript_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'javascript'
+          })
+          sql_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'sql'
+          })
+
+          // 应用制作
+          mobile_apps_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'mobile_apps'
+          })
+          computer_apps_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'computer_apps'
+          })
+
+          // 网云存储
+          network_disk_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'network_disk'
+          })
+          network_server_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'network_server'
+          })
+
+          // 资源网站
+          resource_img_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'resource_img'
+          })
+          resource_film_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'resource_film'
+          })
+          resource_course_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'resource_course'
+          })
+
+          // 视频网站
+          video_domestic_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'video_domestic'
+          })
+          video_international_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'video_international'
+          })
+          video_other_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'video_other'
+          })
+
+          // 社区论坛
+          forum_public_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'forum_public'
+          })
+          forum_professional_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'forum_professional'
+          })
+          siteblog_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'siteblog'
+          })
+
+
+          // 网络加速
+          net_speed_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'net_speed'
+          })
+          net_proxy_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'net_proxy'
+          })
+
+          // 工具软件
+          tools_generic_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'tools_generic'
+          })
+          tools_professional_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'tools_professional'
+          })
+
+          // 公共服务
+          public_edu_data.value = ress.filter(function (arr) {
+            return arr.classtwo == 'public_edu'
+          })
+
+
+
+          console.log(ress);
+
+          // alert('数据获取成功');
+        })
+      }
+      getdata()
+
+
+      // 搜索框脚本
+      const keyword = ref('')
+      const baseurl = ref('https://cn.bing.com/search?q=')
+      const search_engine_icon = ref('icon/bing_logo.png')
+
+
+      const change_search_engine = (momo) => {
+        console.log("001");
+        switch (momo) {
+          case 'google':
+            baseurl.value = 'https://www.google.com/search?q='
+            search_engine_icon.value = 'icon/google_logo.png'
+            break
+          case 'baidu':
+            baseurl.value = 'https://baidu.com/s?wd='
+            search_engine_icon.value = 'icon/baidu_logo.png'
+            break
+          case 'bilbil':
+            baseurl.value = 'https://search.bilibili.com/all?keyword='
+            search_engine_icon.value = 'icon/bilbil_logo.png'
+            break
+          case 'bing':
+            baseurl.value = 'https://cn.bing.com/search?q='
+            search_engine_icon.value = 'icon/bing_logo.png'
+            break
+          case 'csdn':
+            baseurl.value = "https://so.csdn.net/so/search?q="
+            search_engine_icon.value = 'icon/csdn.png'
+            break
+          default:
+            console.log("nono");
+            break;
+        }
+
+
+
+
+
+
+
+
+
+      }
+      const open_web = () => {
+        if (keyword.value == '') {
+          alert('请输入')
+        } else {
+          window.open(`${baseurl.value}` + `${keyword.value}`)
+        }
+      }
+
+
+
+      return {
+        state,
+        backdata,
+        keyword,
+        baseurl,
+        search_engine_icon,
+
+        htmlcss_data,
+        javascript_data,
+        sql_data,
+
+        mobile_apps_data,
+        computer_apps_data,
+
+        network_disk_data,
+        network_server_data,
+
+        resource_img_data,
+        resource_film_data,
+        resource_course_data,
+
+        video_domestic_data,
+        video_international_data,
+        video_other_data,
+
+        forum_public_data,
+        forum_professional_data,
+        siteblog_data,
+
+        net_speed_data,
+        net_proxy_data,
+
+        tools_generic_data,
+        tools_professional_data,
+
+        public_edu_data,
+
+        changeState,
+        getdata,
+
+        change_search_engine,
+        open_web,
+
+
+
+      }
+    }
+  })
+  app.mount("#app")
+</script>
+
 </html>
